@@ -17,10 +17,10 @@ namespace RxLog
         {
             var section = (RxLogConfigurationSection)ConfigurationManager.GetSection("rxLog");
 
-            Default = MakeConfigSubject(section.Default);
+            Default = MakeSubject(section.Default);
 
             foreach (var element in section.Subjects.Cast<RxLogSubjectElement>())
-                ConfigSubjects[element.Name] = MakeConfigSubject(element);
+                ConfigSubjects[element.Name] = MakeSubject(element);
         }
 
         public static Subject<object> GetConfigSubject(string name)
@@ -29,7 +29,7 @@ namespace RxLog
             return ConfigSubjects[name];
         }
 
-        public static Subject<object> MakeConfigSubject(RxLoggerCollection element)
+        public static Subject<object> MakeSubject(RxLoggerCollection element)
         {
             var loggers = element.Cast<RxLoggerElement>()
                 .Select(e => TypeUtility.GetInstance<TextWriter>(TypeUtility.GetType(e.SourceType), e.MemberName, e.Argument))
@@ -43,15 +43,15 @@ namespace RxLog
             return subject;
         }
 
-        public static Subject<object> MakeConfigSubject(string name = null)
+        public static Subject<object> MakeSubjectFromConfig(string name = null)
         {
             var section = (RxLogConfigurationSection)ConfigurationManager.GetSection("rxLog");
 
             if (name == null)
-                return MakeConfigSubject(section.Default);
+                return MakeSubject(section.Default);
 
             var map = section.Subjects.Cast<RxLogSubjectElement>().ToDictionary(e => e.Name);
-            return MakeConfigSubject(map[name]);
+            return MakeSubject(map[name]);
         }
     }
 }
