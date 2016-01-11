@@ -21,7 +21,7 @@ namespace RxLog
                 argument = Defaults.TimestampFormat;
 
             var args = argument.Split(',');
-            TimestampFormat = args[0];
+            TimestampFormat = args[0].Trim();
             switch (args.Length)
             {
                 case 1:
