@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Defaults.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LoggerUtility.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LogItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LogItemExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LogItemLevel.cs" />

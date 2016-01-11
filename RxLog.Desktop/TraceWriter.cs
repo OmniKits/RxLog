@@ -7,8 +7,12 @@ namespace RxLog
 {
     public class TraceWriter : LogWriter
     {
-        public TraceWriter(string timestampFormat = Defaults.TimestampFormat, LoggingLevel level = LoggingLevel.Trace, IFormatProvider formatProvider = null)
+        public TraceWriter(string timestampFormat, LoggingLevel level = LoggingLevel.Trace, IFormatProvider formatProvider = null)
             : base(timestampFormat, formatProvider, level)
+        { }
+
+        public TraceWriter()
+            : this(Defaults.TimestampFormat)
         { }
 
         protected override void FlushLine(string line)
