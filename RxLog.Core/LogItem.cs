@@ -21,7 +21,7 @@
         }
 
         public override string ToString()
-            => $"{Level.GetPrefix()}\t{Data}";
+            => $"{Level.GetPrefix()} {Data}";
 
         public override int GetHashCode()
             => (Data == null ? 0 : Data.GetHashCode()) ^ (int)Level;

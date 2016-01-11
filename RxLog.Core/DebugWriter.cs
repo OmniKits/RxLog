@@ -7,8 +7,8 @@ namespace RxLog
 {
     public class DebugWriter : LogWriter
     {
-        public DebugWriter(LoggingLevel level = LoggingLevel.Debug, IFormatProvider formatProvider = null)
-            : base(formatProvider, level)
+        public DebugWriter(string timestampFormat = Defaults.TimestampFormat, LoggingLevel level = LoggingLevel.Debug, IFormatProvider formatProvider = null)
+            : base(timestampFormat, formatProvider, level)
         { }
 
         protected override void FlushLine(string line)

@@ -5,22 +5,26 @@ namespace RxLog
     public abstract class LogWriter : LineWriter
     {
         public LoggingLevel Level { get; }
+        protected string TimestampFormat { get; }
         protected LogItemLevel CurrentItemLevel { get; set; } = (LogItemLevel)(-1);
+        protected DateTime CurrentItemTimestamp { get; set; } = DateTime.Now;
 
-        protected LogWriter(IFormatProvider formatProvider, LoggingLevel level)
+        protected LogWriter(string timestampFormat, IFormatProvider formatProvider, LoggingLevel level)
             : base(formatProvider)
         {
+            TimestampFormat = timestampFormat;
             Level = level;
         }
 
         protected override string DecorateLine(string source)
-            => $"{CurrentItemLevel.GetPrefix()}\t{source}";
+            => $"{CurrentItemTimestamp.ToString(TimestampFormat, FormatProvider)}{CurrentItemLevel.GetPrefix()} {source}";
 
         public override void Write(object value)
         {
             var item = value.ToLogItem();
             if (Level.ShouldSkip(item.Level))
                 return;
+            CurrentItemTimestamp = DateTime.Now;
             CurrentItemLevel = item.Level;
             base.Write(item.Data);
         }
@@ -29,6 +33,7 @@ namespace RxLog
             var item = value.ToLogItem();
             if (Level.ShouldSkip(item.Level))
                 return;
+            CurrentItemTimestamp = DateTime.Now;
             CurrentItemLevel = item.Level;
             base.WriteLine(item.Data);
         }
