@@ -7,7 +7,7 @@ namespace RxLog
 {
     public class TraceWriter : LogWriter
     {
-        protected TraceWriter(LoggingLevel level = LoggingLevel.Trace, IFormatProvider formatProvider = null)
+        public TraceWriter(LoggingLevel level = LoggingLevel.Trace, IFormatProvider formatProvider = null)
             : base(formatProvider, level)
         { }
 

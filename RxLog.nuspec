@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>RxLog</id>
+        <version>0.0.1</version>
+        <authors>Licshee</authors>
+        <projectUrl>https://github.com/NanaLich/RxLog</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>An simple logging library dependents on Rx.</description>
+        <dependencies>
+            <dependency id="TextWriters" version="0.8.1" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="Release.Net40\RxLog.dll" target="lib\net40\RxLog.dll" />
+        <file src="Release.P136\RxLog.dll" target="lib\portable-net4+sl5+wp8+win8\RxLog.dll" />
+    </files>
+</package>

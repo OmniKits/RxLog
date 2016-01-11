@@ -7,7 +7,7 @@ namespace RxLog
 {
     public class DebugWriter : LogWriter
     {
-        protected DebugWriter(LoggingLevel level = LoggingLevel.Debug, IFormatProvider formatProvider = null)
+        public DebugWriter(LoggingLevel level = LoggingLevel.Debug, IFormatProvider formatProvider = null)
             : base(formatProvider, level)
         { }
 

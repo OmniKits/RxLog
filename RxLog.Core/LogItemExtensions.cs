@@ -9,19 +9,19 @@
             switch (level)
             {
                 case Trace:
-                    return "[TRACE]\t";
+                    return "[TRACE]";
                 case Debug:
-                    return "[DEBUG]\t";
+                    return "[DEBUG]";
                 case Information:
-                    return "[INFO.]\t";
+                    return "[INFO.]";
                 case Warning:
-                    return "[WARN.]\t";
+                    return "[WARN.]";
                 case Error:
-                    return "[ERROR]\t";
+                    return "[ERROR]";
                 case Fatal:
-                    return "[FATAL]\t";
+                    return "[FATAL]";
             }
-            return "[?????]\t";
+            return "[?????]";
         }
 
         public static bool ShouldSkip(this LoggingLevel logging, LogItemLevel logItem)

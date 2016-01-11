@@ -14,7 +14,7 @@ namespace RxLog
         }
 
         protected override string DecorateLine(string source)
-            => $"{CurrentItemLevel.GetPrefix()}{source}";
+            => $"{CurrentItemLevel.GetPrefix()}\t{source}";
 
         public override void Write(object value)
         {
