@@ -64,7 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GetInstance.cs" />
-    <Compile Include="GetType.cs" />
   </ItemGroup>
   <Import Project="..\RxLog.Core\RxLog.Core.projitems" Label="Shared" />
   <Import Project="..\RxLog.Desktop\RxLog.Desktop.projitems" Label="Shared" />

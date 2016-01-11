@@ -13,6 +13,11 @@ namespace RxLog
     {
         static LoggerUtility()
         {
+            Default = MakeDefaultSubject();
+        }
+
+        public static Subject<object> MakeDefaultSubject()
+        {
             var section = (RxLogConfigurationSection)ConfigurationManager.GetSection("rxLog");
 
             var defaultLoggers = section.Default.Cast<RxLoggerElement>()
@@ -24,7 +29,7 @@ namespace RxLog
             foreach (var logger in defaultLoggers)
                 subject.Subscribe(logger.WriteLine);
 
-            Default = subject;
+            return subject;
         }
     }
 }

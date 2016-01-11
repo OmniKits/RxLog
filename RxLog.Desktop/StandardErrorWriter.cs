@@ -1,16 +1,36 @@
 ﻿using System;
+using System.Linq;
 
 namespace RxLog
 {
     public class StandardErrorWriter : LogWriter
     {
-        public StandardErrorWriter(string timestampFormat, LoggingLevel level = LoggingLevel.Error, IFormatProvider formatProvider = null)
+        const LoggingLevel DefaultLevel = LoggingLevel.Error;
+
+        public StandardErrorWriter(string timestampFormat, LoggingLevel level = DefaultLevel, IFormatProvider formatProvider = null)
             : base(timestampFormat, formatProvider, level)
         { }
 
-        public StandardErrorWriter()
-            : this(Defaults.TimestampFormat)
-        { }
+        public StandardErrorWriter(string argument = null)
+            : base(null)
+        {
+            if (string.IsNullOrEmpty(argument))
+                argument = Defaults.TimestampFormat;
+
+            var args = argument.Split(',');
+            TimestampFormat = args[0];
+            switch (args.Length)
+            {
+                case 1:
+                    Level = DefaultLevel;
+                    return;
+                case 2:
+                    Level = (LoggingLevel)Enum.Parse(typeof(LoggingLevel), args[1], true);
+                    return;
+                default:
+                    throw new ArgumentException();
+            }
+        }
 
         protected override void FlushLine(string line)
             => Console.Error.WriteLine(line);
