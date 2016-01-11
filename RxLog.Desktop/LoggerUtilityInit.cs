@@ -11,25 +11,47 @@ namespace RxLog
 
     partial class LoggerUtility
     {
-        static LoggerUtility()
-        {
-            Default = MakeDefaultSubject();
-        }
+        private static readonly Dictionary<string, Subject<object>> ConfigSubjects = new Dictionary<string, Subject<object>>();
 
-        public static Subject<object> MakeDefaultSubject()
+        static LoggerUtility()
         {
             var section = (RxLogConfigurationSection)ConfigurationManager.GetSection("rxLog");
 
-            var defaultLoggers = section.Default.Cast<RxLoggerElement>()
+            Default = MakeConfigSubject(section.Default);
+
+            foreach (var element in section.Subjects.Cast<RxLogSubjectElement>())
+                ConfigSubjects[element.Name] = MakeConfigSubject(element);
+        }
+
+        public static Subject<object> GetConfigSubject(string name)
+        {
+            if (name == null) return Default;
+            return ConfigSubjects[name];
+        }
+
+        public static Subject<object> MakeConfigSubject(RxLoggerCollection element)
+        {
+            var loggers = element.Cast<RxLoggerElement>()
                 .Select(e => TypeUtility.GetInstance<TextWriter>(TypeUtility.GetType(e.SourceType), e.MemberName, e.Argument))
                 .ToArray();
 
             var subject = new Subject<object>();
 
-            foreach (var logger in defaultLoggers)
+            foreach (var logger in loggers)
                 subject.Subscribe(logger.WriteLine);
 
             return subject;
+        }
+
+        public static Subject<object> MakeConfigSubject(string name = null)
+        {
+            var section = (RxLogConfigurationSection)ConfigurationManager.GetSection("rxLog");
+
+            if (name == null)
+                return MakeConfigSubject(section.Default);
+
+            var map = section.Subjects.Cast<RxLogSubjectElement>().ToDictionary(e => e.Name);
+            return MakeConfigSubject(map[name]);
         }
     }
 }
