@@ -12,8 +12,8 @@
 
     public enum LoggingLevel
     {
-        All,
-        Trace = All,
+        All = int.MinValue,
+        Trace = LogItemLevel.Trace,
         Debug,
         Information,
         Warning,
