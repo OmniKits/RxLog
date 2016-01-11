@@ -4,6 +4,25 @@
 
     public static class LogItemExtensions
     {
+        public static string GetFixedLabel(this LogItemLevel level)
+        {
+            switch (level)
+            {
+                case Trace:
+                    return "TRACE";
+                case Debug:
+                    return "DEBUG";
+                case Information:
+                    return "INFO.";
+                case Warning:
+                    return "WARN.";
+                case Error:
+                    return "ERROR";
+                case Fatal:
+                    return "FATAL";
+            }
+            return "?????";
+        }
         public static string GetPrefix(this LogItemLevel level)
         {
             switch (level)
