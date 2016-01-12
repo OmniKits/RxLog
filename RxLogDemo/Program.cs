@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Reactive.Subjects;
 
 namespace RxLogDemo
 {
-
     using RxLog;
-
     using static RxLog.LogItemLevel;
-
 
     class Program
     {
@@ -15,6 +11,7 @@ namespace RxLogDemo
         {
             var subject = LoggerUtility.Default;
             //subject.Subscribe(LoggerUtility.Default);
+            subject.Subscribe(LoggerUtility.GetConfigSubject("file"));
             subject.Subscribe(LoggerUtility.GetConfigSubject("debug"));
             subject.Subscribe(LoggerUtility.MakeSubjectFromConfig("trace"));
 

@@ -5,13 +5,9 @@ namespace RxLog
     public abstract class LogWriter : LineWriter
     {
         public LoggingLevel Level { get; protected set; }
-        protected string TimestampFormat { get; set; }
+        public string TimestampFormat { get; protected set; }
         protected LogItemLevel CurrentItemLevel { get; set; } = (LogItemLevel)(-1);
         protected DateTime CurrentItemTimestamp { get; set; } = DateTime.Now;
-
-        protected LogWriter(IFormatProvider formatProvider)
-            : base(formatProvider)
-        { }
 
         protected LogWriter(string timestampFormat, IFormatProvider formatProvider, LoggingLevel level)
             : base(formatProvider)

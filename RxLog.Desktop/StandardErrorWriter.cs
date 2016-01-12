@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 namespace RxLog
 {
@@ -12,7 +11,7 @@ namespace RxLog
         { }
 
         public StandardErrorWriter(string argument = null)
-            : base(null)
+            : this(null, DefaultLevel)
         {
             if (string.IsNullOrEmpty(argument))
                 argument = Defaults.TimestampFormat;
