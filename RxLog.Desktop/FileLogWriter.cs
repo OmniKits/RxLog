@@ -36,7 +36,7 @@ namespace RxLog
 
             args = args.Skip(2).ToArray();
             if (args.Length > 0)
-                TimestampFormat = string.Join("?", args);
+                TimestampFormat = string.Join("?", args).Trim();
         }
 
         protected override void FlushLine(string line)

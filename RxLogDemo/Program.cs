@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace RxLogDemo
 {
@@ -17,6 +18,7 @@ namespace RxLogDemo
 
             subject.OnNext(@"OMG
 WTF");
+            Thread.Sleep(1000);
             subject.OnNext(new LogItem("***", (LogItemLevel)(-1)));
 
             subject.OnNext(new LogItem(nameof(Trace), Trace));
