@@ -42,17 +42,23 @@ namespace RxLog
         protected override void FlushLine(string line)
         {
             var path = string.Format(FilePathFormat, CurrentItemTimestamp);
-            var dir = Path.GetDirectoryName(path);
-            dir = Environment.ExpandEnvironmentVariables(dir);
+            var dir = Environment.ExpandEnvironmentVariables(Path.GetDirectoryName(path));
             path = Path.Combine(Directory.CreateDirectory(dir).FullName, Path.GetFileName(path));
 
-            if (_CurrentFile == null || _CurrentFile.Item1 != path)
-            {
-                var fs = new FileStream(path, FileMode.Append, FileAccess.Write, FileShare.Read | FileShare.Delete);
-                var fw = new StreamWriter(fs, Encoding.UTF8);
-                fw.AutoFlush = true;
-                _CurrentFile = Tuple.Create(path, fw);
-            }
+            if (_CurrentFile == null)
+                goto CreateNew;
+            if (_CurrentFile.Item1 == path)
+                goto WriteLine;
+
+            _CurrentFile.Item2.Close();
+
+        CreateNew:
+            var fs = new FileStream(path, FileMode.Append, FileAccess.Write, FileShare.Read);
+            var fw = new StreamWriter(fs, Encoding.UTF8);
+            fw.AutoFlush = true;
+            _CurrentFile = Tuple.Create(path, fw);
+
+        WriteLine:
             _CurrentFile.Item2.WriteLine(line);
         }
     }
