@@ -6,8 +6,11 @@ namespace RxLog
     {
         public LoggingLevel Level { get; protected set; }
         public string TimestampFormat { get; protected set; }
+
+        protected DateTime CurrentTimestamp { get; set; } = DateTime.Now;
+        protected object CurrentItemCategory { get; set; }
         protected LogItemLevel CurrentItemLevel { get; set; } = (LogItemLevel)(-1);
-        protected DateTime CurrentItemTimestamp { get; set; } = DateTime.Now;
+        protected string CurrentItemPrefix { get; set; }
 
         protected LogWriter(string timestampFormat, IFormatProvider formatProvider, LoggingLevel level)
             : base(formatProvider)
@@ -17,15 +20,27 @@ namespace RxLog
         }
 
         protected override string DecorateLine(string source)
-            => $"{CurrentItemTimestamp.ToString(TimestampFormat, FormatProvider)}{CurrentItemLevel.GetPrefix()} {source}";
+            => CurrentItemPrefix + source;
+
+        protected virtual string GetLogItemPrefix(LogItem item)
+            => $"{CurrentTimestamp.ToString(TimestampFormat, FormatProvider)}{item.GetPrefix()}";
+        private void ReadyCurrentItem(LogItem item)
+        {
+            CurrentTimestamp = DateTime.Now;
+            CurrentItemLevel = item.Level;
+            CurrentItemCategory = item.Category;
+
+            CurrentItemPrefix = GetLogItemPrefix(item);
+        }
 
         public override void Write(object value)
         {
             var item = value.ToLogItem();
             if (Level.ShouldSkip(item.Level))
                 return;
-            CurrentItemTimestamp = DateTime.Now;
-            CurrentItemLevel = item.Level;
+
+            ReadyCurrentItem(item);
+
             base.Write(item.Data);
         }
         public override void WriteLine(object value)
@@ -33,8 +48,9 @@ namespace RxLog
             var item = value.ToLogItem();
             if (Level.ShouldSkip(item.Level))
                 return;
-            CurrentItemTimestamp = DateTime.Now;
-            CurrentItemLevel = item.Level;
+
+            ReadyCurrentItem(item);
+            
             base.WriteLine(item.Data);
         }
     }

@@ -19,7 +19,7 @@ namespace RxLogDemo
             subject.OnNext(@"OMG
 WTF");
             Thread.Sleep(1000);
-            subject.OnNext(new LogItem("***", (LogItemLevel)(-1)));
+            subject.OnNext(new LogItem("***", "UNKNOWN", (LogItemLevel)(-1)));
 
             subject.OnNext(new LogItem(nameof(Trace), Trace));
             subject.OnNext(new LogItem(nameof(Debug), Debug));

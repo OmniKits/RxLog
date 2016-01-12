@@ -41,7 +41,7 @@ namespace RxLog
 
         protected override void FlushLine(string line)
         {
-            var path = string.Format(FilePathFormat, CurrentItemTimestamp);
+            var path = string.Format(FilePathFormat, CurrentTimestamp);
             var dir = Environment.ExpandEnvironmentVariables(Path.GetDirectoryName(path));
             path = Path.Combine(Directory.CreateDirectory(dir).FullName, Path.GetFileName(path));
 
