@@ -27,12 +27,16 @@ namespace RxLog
 
             FilePathFormat = args[0].Trim();
 
+            if (args.Length == 1) return;
+
             LoggingLevel level;
             if (!Enum.TryParse(args[1], true, out level))
                 level = DefaultLevel;
             Level = level;
 
-            TimestampFormat = string.Join("?", args.Skip(2).ToArray());
+            args = args.Skip(2).ToArray();
+            if (args.Length > 0)
+                TimestampFormat = string.Join("?", args);
         }
 
         protected override void FlushLine(string line)
