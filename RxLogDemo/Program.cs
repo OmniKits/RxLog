@@ -16,17 +16,17 @@ namespace RxLogDemo
             subject.Subscribe(LoggerUtility.GetConfigSubject("debug"));
             subject.Subscribe(LoggerUtility.MakeSubjectFromConfig("trace"));
 
-            subject.OnNext(@"OMG
+            subject.Log(@"OMG
 WTF");
             Thread.Sleep(1000);
-            subject.OnNext(new LogItem("***", "UNKNOWN", (LogItemLevel)(-1)));
+            subject.Log("***", "UNKNOWN", level: (LogItemLevel)(-1));
 
-            subject.OnNext(new LogItem(nameof(Trace), Trace));
-            subject.OnNext(new LogItem(nameof(Debug), Debug));
-            subject.OnNext(new LogItem(nameof(Information), Information));
-            subject.OnNext(new LogItem(nameof(Warning), Warning));
-            subject.OnNext(new LogItem(nameof(Error), Error));
-            subject.OnNext(new LogItem(nameof(Fatal), Fatal));
+            subject.Trace(nameof(Trace));
+            subject.Debug(nameof(Debug));
+            subject.Info(nameof(Information));
+            subject.Warn(nameof(Warning));
+            subject.Error(nameof(Error));
+            subject.Fatal(nameof(Fatal));
 
             Console.ReadKey();
         }

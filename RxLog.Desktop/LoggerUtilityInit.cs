@@ -10,7 +10,7 @@ namespace RxLog
 
     partial class LoggerUtility
     {
-        private static readonly Dictionary<string, Subject<object>> ConfigSubjects = new Dictionary<string, Subject<object>>();
+        private static readonly Dictionary<string, Subject<LogItem>> ConfigSubjects = new Dictionary<string, Subject<LogItem>>();
 
         static LoggerUtility()
         {
@@ -22,19 +22,19 @@ namespace RxLog
                 ConfigSubjects[element.Name] = MakeSubject(element);
         }
 
-        public static Subject<object> GetConfigSubject(string name)
+        public static Subject<LogItem> GetConfigSubject(string name)
         {
             if (name == null) return Default;
             return ConfigSubjects[name];
         }
 
-        public static Subject<object> MakeSubject(RxLoggerCollection element)
+        public static Subject<LogItem> MakeSubject(RxLoggerCollection element)
         {
             var loggers = element.Cast<RxLoggerElement>()
                 .Select(e => TypeUtility.GetInstance<TextWriter>(TypeUtility.GetType(e.SourceType), e.MemberName, e.Argument))
                 .ToArray();
 
-            var subject = new Subject<object>();
+            var subject = new Subject<LogItem>();
 
             foreach (var logger in loggers)
                 subject.Subscribe(logger.WriteLine);
@@ -42,7 +42,7 @@ namespace RxLog
             return subject;
         }
 
-        public static Subject<object> MakeSubjectFromConfig(string name = null)
+        public static Subject<LogItem> MakeSubjectFromConfig(string name = null)
         {
             var section = (RxLogConfigurationSection)ConfigurationManager.GetSection("rxLog");
 
