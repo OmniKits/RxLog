@@ -17,9 +17,9 @@ namespace RxLogDemo
             subject.Subscribe(LoggerUtility.MakeSubjectFromConfig("trace"));
 
             subject.Log(@"OMG
-WTF");
+WTF", (LogItemLevel)(-1));
             Thread.Sleep(1000);
-            subject.Log("***", "UNKNOWN", level: (LogItemLevel)(-1));
+            subject.Log("***", "whatever");
 
             subject.Trace(nameof(Trace));
             subject.Debug(nameof(Debug));

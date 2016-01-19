@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="RxLog, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RxLog.0.6-a\lib\net40\RxLog.dll</HintPath>
+      <HintPath>..\packages\RxLog.0.6-b\lib\net40\RxLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

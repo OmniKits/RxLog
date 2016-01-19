@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
     <metadata>
         <id>RxLog</id>
-        <version>0.6-a</version>
+        <version>0.6-b</version>
         <authors>Licshee</authors>
         <projectUrl>https://github.com/NanaLich/RxLog</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>

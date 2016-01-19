@@ -18,8 +18,12 @@ namespace RxLog
             set { _ThreadCurrent = value; }
         }
 
-        public static void Log(this Subject<LogItem> subject, object data, object category = null, LogItemLevel level = DefaultItemLevel)
-            => subject.OnNext(new LogItem(data, category, level));
+        public static void Log(this Subject<LogItem> subject, LogItem item)
+            => subject.OnNext(item);
+        public static void Log(this Subject<LogItem> subject, object data, object category, LogItemLevel level = DefaultItemLevel)
+            => subject.Log(new LogItem(data, category, level));
+        public static void Log(this Subject<LogItem> subject, object data, LogItemLevel level = DefaultItemLevel)
+            => subject.Log(data, null, level);
 
         public static void Debug(this Subject<LogItem> subject, object data, object category = null)
             => subject.OnNext(new LogItem(data, category, LogItemLevel.Debug));
