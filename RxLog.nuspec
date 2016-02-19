@@ -2,13 +2,13 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>RxLog</id>
-        <version>0.6</version>
+        <version>0.6.2</version>
         <authors>Licshee</authors>
         <projectUrl>https://github.com/OmniKits/RxLog</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>An simple logging library relies on Rx.</description>
         <dependencies>
-            <dependency id="TextWriters" version="0.8.1" />
+            <dependency id="TextWriters" version="0.8.3" />
             <dependency id="Rx-Linq" version="2.2.5" />
         </dependencies>
     </metadata>

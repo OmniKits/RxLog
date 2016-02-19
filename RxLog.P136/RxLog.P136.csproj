@@ -33,6 +33,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\ok.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
     <Folder Include="Properties\" />
@@ -50,8 +56,8 @@
       <HintPath>..\packages\Rx-Linq.2.2.5\lib\portable-net40+sl5+win8+wp8\System.Reactive.Linq.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="TextWriters, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TextWriters.0.8.1\lib\TextWriters.dll</HintPath>
+    <Reference Include="TextWriters, Version=0.0.0.0, Culture=neutral, PublicKeyToken=7af88464decbdfc7, processorArchitecture=MSIL">
+      <HintPath>..\packages\TextWriters.0.8.3\lib\TextWriters.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

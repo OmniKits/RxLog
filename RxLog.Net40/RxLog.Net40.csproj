@@ -30,6 +30,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\ok.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -51,8 +57,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TextWriters, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TextWriters.0.8.1\lib\TextWriters.dll</HintPath>
+    <Reference Include="TextWriters, Version=0.0.0.0, Culture=neutral, PublicKeyToken=7af88464decbdfc7, processorArchitecture=MSIL">
+      <HintPath>..\packages\TextWriters.0.8.3\lib\TextWriters.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
