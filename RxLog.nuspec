@@ -4,7 +4,7 @@
         <id>RxLog</id>
         <version>0.6</version>
         <authors>Licshee</authors>
-        <projectUrl>https://github.com/NanaLich/RxLog</projectUrl>
+        <projectUrl>https://github.com/OmniKits/RxLog</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>An simple logging library relies on Rx.</description>
         <dependencies>
