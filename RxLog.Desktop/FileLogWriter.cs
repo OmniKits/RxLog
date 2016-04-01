@@ -23,8 +23,8 @@ namespace RxLog
         public FileLogWriter(string argument)
             : this(null, null, DefaultLevel)
         {
-            var args = argument.ReadCommandLineArguments(TextualArgumentOptions.MixEcmaScriptLikeEscape)
-                .Select(arg => TextualArgumentUtility.EvaluateCommandLineArgument(arg, TextualArgumentOptions.MixEcmaScriptLikeEscape))
+            var args = argument.ReadCommandLineArguments(TextualArgumentOptions.EnableEcmaScriptLike)
+                .Select(arg => TextualArgumentUtility.EvaluateCommandLineArgument(arg, TextualArgumentOptions.EnableEcmaScriptLike))
                 .ToArray();
             //var args = argument.Split('?');
 
@@ -65,7 +65,7 @@ namespace RxLog
             _CurrentFile.Item2.Close();
 
         CreateNew:
-            var fs = new FileStream(path, FileMode.Append, FileAccess.Write, FileShare.Read);
+            var fs = new FileStream(path, FileMode.Append, FileAccess.Write, FileShare.Read | FileShare.Delete);
             var fw = new StreamWriter(fs, Encoding.UTF8);
             fw.AutoFlush = true;
             _CurrentFile = Tuple.Create(path, fw);
