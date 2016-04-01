@@ -23,7 +23,9 @@ namespace RxLog
         public FileLogWriter(string argument)
             : this(null, null, DefaultLevel)
         {
-            var args = argument.ReadCommandLineArguments(TextualArgumentOptions.MixEcmaScriptLikeEscape);
+            var args = argument.ReadCommandLineArguments(TextualArgumentOptions.MixEcmaScriptLikeEscape)
+                .Select(arg => TextualArgumentUtility.EvaluateCommandLineArgument(arg, TextualArgumentOptions.MixEcmaScriptLikeEscape))
+                .ToArray();
             //var args = argument.Split('?');
 
             FilePathFormat = args[0].Trim();
