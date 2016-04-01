@@ -23,7 +23,8 @@ namespace RxLog
         public FileLogWriter(string argument)
             : this(null, null, DefaultLevel)
         {
-            var args = argument.Split('?');
+            var args = argument.ReadCommandLineArguments(TextualArgumentOptions.MixEcmaScriptLikeEscape);
+            //var args = argument.Split('?');
 
             FilePathFormat = args[0].Trim();
 
@@ -34,9 +35,18 @@ namespace RxLog
                 level = DefaultLevel;
             Level = level;
 
-            args = args.Skip(2).ToArray();
-            if (args.Length > 0)
-                TimestampFormat = string.Join("?", args).Trim();
+            if (args.Length == 2) return;
+            switch (args.Length)
+            {
+                case 2:
+                    return;
+                case 3:
+                    break;
+                default:
+                    throw new ArgumentException();
+            }
+
+            TimestampFormat = args[2];
         }
 
         protected override void FlushLine(string line)

@@ -33,8 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="RxLog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=7af88464decbdfc7, processorArchitecture=MSIL">
-      <HintPath>..\packages\RxLog.0.6.2\lib\net40\RxLog.dll</HintPath>
+    <Reference Include="ILTricks, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ILTricks.0.4.1\lib\net40-client\ILTricks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RxLog, Version=0.7.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RxLog.0.7.0.1\lib\net40\RxLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -56,8 +60,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TextWriters, Version=0.0.0.0, Culture=neutral, PublicKeyToken=7af88464decbdfc7, processorArchitecture=MSIL">
-      <HintPath>..\packages\TextWriters.0.8.3\lib\TextWriters.dll</HintPath>
+    <Reference Include="TextWriters, Version=0.8.3.0, Culture=neutral, PublicKeyToken=7af88464decbdfc7, processorArchitecture=MSIL">
+      <HintPath>..\packages\TextWriters.0.8.3.1\lib\TextWriters.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

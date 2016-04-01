@@ -9,6 +9,7 @@
     <Import_RootNamespace>RxLog</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AssemblyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Defaults.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GetType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LoggerUtility.cs" />
